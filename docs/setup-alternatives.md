@@ -34,7 +34,7 @@ Use these only if uploading the zip (see the [README](../README.md)) doesn't wor
    ```
    Create a skill named "cv-match-coach" from the attached files. Use SKILL.md exactly as the skill's name, description and instructions, without shortening or rephrasing it. Add the other files with unchanged names and content, in the folders SKILL.md refers to (references/, examples/, assets/). Do not add instructions of your own. When done, list all files in the skill.
    ```
-4. Check that the file list includes SKILL.md, 8 files in `references/` and the example files.
+4. Check that the file list includes SKILL.md, 9 files in `references/` and the example files.
 
 ## C. Quick try without setup (nothing is saved)
 
