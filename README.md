@@ -17,6 +17,17 @@ Open a new chat, attach a CV (a Cinode Word export works best), paste the client
 ```
 Match this CV to this assignment
 ```
+After that, **just follow the menu**. Every answer ends with the next steps. Reply with a letter:
+```
+Progress: ✓ CV read → ✓ Match → ◻ Questions → ◻ CV → ◻ Cinode/Word
+A – Answer the questions above
+B – Experience check on the requirements
+C – Suggest changes to the CV
+D – Something else
+```
+Not sure where to start? Type `help`.
+
+You can also type commands directly:
 
 | Type | You get |
 |---|---|

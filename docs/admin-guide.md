@@ -25,6 +25,7 @@ cv-agent/
 └── cv-match-coach/           ← THE SKILL
     ├── SKILL.md              ← instructions: hard rules, workflow, commands
     ├── references/
+    │   ├── workflow.md             ← progress line + A–D next-step menus
     │   ├── file-handling.md        ← reading docx/pdf/scans/exports + extraction check
     │   ├── match-scoring-rubric.md ← how matches are scored
     │   ├── experience-check.md     ← months per skill, overlaps, ranges

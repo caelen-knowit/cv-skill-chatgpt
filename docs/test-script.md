@@ -26,6 +26,8 @@ Purpose: check the skill end to end, using a CV you know by heart. You will spot
 | 12 | Repeat 3–5 in **the other language** (Swedish ↔ English), e.g. `Matcha CV:t mot uppdraget` | CV text stays in the CV's language. Swedish commands work. | |
 | 13 | `Grade this CV` | Is every score backed by a quote from your CV? | |
 | 14 | `Pitch` | Would you send it as-is? Is it free of hype? | |
+| 15 | During all steps: reply only `A`, `B` … | Every main answer ends with a progress line and an A–D menu that fits the situation. A letter runs the right option. | |
+| 16 | New chat: type `help` (and `hjälp`) | Start menu in the right language | |
 
 ## Score the test
 - **Any invented fact = stop.** Copy the exact output and send it to me. That's the most important bug class.

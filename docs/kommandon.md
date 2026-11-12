@@ -6,6 +6,9 @@ Skillen börjar alltid med att visa vad den har läst ur filen. Kontrollera det 
 
 ## Vanligt arbetsflöde
 
+Du behöver inte komma ihåg något av detta. Varje svar slutar med en meny (A, B, C, D), och du svarar med en bokstav. Skriv `hjälp` för att se startmenyn. Kommandona nedan är genvägar.
+
+
 | Steg | Skriv | Du får |
 |---|---|---|
 | 1 | *(CV + förfrågan)* `Matcha CV:t mot uppdraget` | Matchningsrapport: poäng, luckor och numrerade frågor |

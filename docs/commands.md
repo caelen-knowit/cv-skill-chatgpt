@@ -5,6 +5,9 @@ Always upload the CV first (Word, PDF, scan, CV-system export or pasted text), p
 
 ## Typical workflow
 
+You don't need to remember any of this. Every answer ends with a menu (A, B, C, D), and you reply with a letter. Type `help` to see the start menu. The commands below are shortcuts.
+
+
 | Step | Type this | You get |
 |---|---|---|
 | 1 | *(upload CV + paste request)* `Match this CV to this assignment` | Match report with score, gaps and open questions |
