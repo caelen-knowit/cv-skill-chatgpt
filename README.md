@@ -3,18 +3,20 @@
 Upload a consultant CV and a client request. You get an honest match, gaps, an experience check per skill, and an improved, human-sounding CV ready to paste back into Cinode.
 **It never invents facts.** If something is unclear, it asks.
 
-## Start in 3 steps
+## Setup (once, about 2 minutes)
 
-1. **Download** [`cv-match-coach.zip`](cv-match-coach.zip): click the file, then the download button (⬇).
-2. **Upload** it in ChatGPT: sidebar **Plugins → Skills → Create → Upload from your computer**. Then **••• → Share** it with your team.
-3. **Use** it: open a new chat, attach a CV (a Cinode Word export works best), paste the client request, and type:
-   ```
-   Match this CV to this assignment
-   ```
+1. **[⬇ Download cv-match-coach.zip](https://github.com/caelen-knowit/cv-skill-chatgpt/raw/main/cv-match-coach.zip)**
+2. In ChatGPT: **Plugins → Skills → Create → Upload from your computer**, and choose the zip.
+3. **••• → Share** the skill with your team (or the whole workspace). Colleagues then don't need to install anything.
 
-Can't see *Skills*? Ask your ChatGPT admin to enable Skills, or use the [Project setup](docs/setup-alternatives.md) instead.
+Can't see *Skills*? Ask your ChatGPT admin to enable it. Until then, use the [Project fallback](docs/setup-alternatives.md).
 
-## The 5 commands you need
+## Use
+
+Open a new chat, attach a CV (a Cinode Word export works best), paste the client request, and type:
+```
+Match this CV to this assignment
+```
 
 | Type | You get |
 |---|---|
@@ -31,5 +33,4 @@ Swedish works too: `Matcha`, `Erfarenhetskoll`, `Föreslå ändringar`, `Förbä
 ## More
 - All commands: [English](docs/commands.md) · [Svenska](docs/kommandon.md)
 - First test with your own CV: [docs/test-script.md](docs/test-script.md)
-- Owner/admin guide (privacy, maintenance, example library, test plan): [docs/admin-guide.md](docs/admin-guide.md)
-- Other setup options (Project, Create with chat): [docs/setup-alternatives.md](docs/setup-alternatives.md)
+- Owner/admin guide: [docs/admin-guide.md](docs/admin-guide.md)

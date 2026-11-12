@@ -2,6 +2,20 @@
 
 Use these only if uploading the zip (see the [README](../README.md)) doesn't work.
 
+## Skill or Project?
+
+**Use the skill.** A Project doesn't produce better answers: the model and the rules are the same. The difference is how the rules are delivered and kept up to date.
+
+| | Skill (recommended) | Project |
+|---|---|---|
+| Setup for colleagues | None once it's shared | Each person or team copies the files and instructions |
+| Updates | Re-upload once, and everyone has the new version | Every project copy must be updated by hand, so versions drift |
+| Works in | Any chat, including chats inside projects | Only chats inside that project |
+| Rule-following | Instructions load as part of the skill, and reference files are read when needed | Files are retrieved by search, so a rule can be missed more easily |
+| Privacy | Each chat stands alone | Chats in a project can share context, so CVs from different cases can mix |
+
+**Where a Project is still useful:** as a folder for one large tender, holding the request, all candidate CVs and the chats about it, possibly shared with colleagues working on the same bid. The skill works inside it as usual, so you don't need to copy any instructions into the project.
+
 ## A. ChatGPT Project (if Skills are not available)
 
 1. Sidebar → **Projects** → **New project** → name it `CV Match Coach`.
