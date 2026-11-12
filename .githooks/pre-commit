@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Rebuilds the skill zip, all-in-one file and checksums when skill files are committed,
+# and adds them to the same commit. Enable once per clone:
+#   git config core.hooksPath .githooks
+set -euo pipefail
+if git diff --cached --name-only | grep -qE '^(cv-match-coach/|tools/build\.py)'; then
+  python3 tools/build.py >/dev/null
+  git add cv-match-coach.zip cv-match-coach-all-in-one.md CHECKSUMS.txt README.md
+  echo "pre-commit: rebuilt skill zip and checksums ($(cut -c1-12 CHECKSUMS.txt | head -1)…)"
+fi

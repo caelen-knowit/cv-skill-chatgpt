@@ -1,0 +1,54 @@
+name: Build skill and checksums
+
+# Keeps cv-match-coach.zip, cv-match-coach-all-in-one.md, CHECKSUMS.txt and the
+# README checksum block in sync with the skill source.
+#  - Pull requests: fail if the built files are out of date.
+#  - Pushes to main: rebuild and commit the updated files automatically.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Self-test the in-place Word editing script
+        run: |
+          pip install --quiet python-docx
+          python tests/test_docx_inplace.py
+
+      - name: Check built files are up to date (pull requests)
+        if: github.event_name == 'pull_request'
+        run: python tools/build.py --check
+
+      - name: Rebuild and commit if needed (main)
+        if: github.event_name != 'pull_request'
+        run: |
+          python tools/build.py
+          if git diff --quiet; then
+            echo "Built files already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cv-match-coach.zip cv-match-coach-all-in-one.md CHECKSUMS.txt README.md
+          git commit -m "Rebuild skill zip and update checksums [automated]"
+          git push
+
+      - name: Verify checksums
+        run: sha256sum -c CHECKSUMS.txt

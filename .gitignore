@@ -13,3 +13,7 @@ Thumbs.db
 *.png
 *.jpg
 *.jpeg
+
+# Raw screenshots stay local; only annotated, privacy-checked images are committed
+screenshots-raw/
+!docs/images/*.png

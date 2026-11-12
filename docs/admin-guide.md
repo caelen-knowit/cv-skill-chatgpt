@@ -23,7 +23,10 @@ cv-agent/
 ├── docs/                     ← commands (EN/SV), test script, admin guide, setup alternatives
 ├── cv-match-coach.zip        ← ready-to-upload skill (built by build.sh)
 ├── cv-match-coach-all-in-one.md ← the same skill as one text file, for the link or a Project (built by build.sh)
-├── build.sh                  ← rebuilds both files
+├── build.sh / tools/build.py ← deterministic build: zip, all-in-one, CHECKSUMS.txt, README checksum
+├── CHECKSUMS.txt             ← SHA-256 of the zip and the all-in-one file
+├── .github/workflows/build.yml ← rebuilds + commits on push, checks pull requests
+├── .githooks/pre-commit      ← rebuilds on commit (enable: git config core.hooksPath .githooks)
 └── cv-match-coach/           ← THE SKILL
     ├── SKILL.md              ← instructions: hard rules, workflow, commands
     ├── references/
@@ -55,7 +58,10 @@ cv-agent/
    ```bash
    ./build.sh
    ```
-   This rebuilds both `cv-match-coach.zip` and `cv-match-coach-all-in-one.md`. **Always run it after changing anything in `cv-match-coach/`, and commit both files**, otherwise the link-based start uses old rules.
+   This rebuilds `cv-match-coach.zip`, `cv-match-coach-all-in-one.md`, `CHECKSUMS.txt` and the checksum in the README. The build is **deterministic**: the same skill files always give the same checksum on any machine, so anyone can verify the download.
+   **Automatic:** you normally don't need to run it yourself.
+   - The **commit hook** rebuilds and adds the files when you commit skill changes. Enable it once per clone with `git config core.hooksPath .githooks`.
+   - The **GitHub Action** (`.github/workflows/build.yml`) rebuilds and commits on every push to `main`, and fails pull requests whose built files are out of date. If `main` gets branch protection, allow `github-actions[bot]` to push, or switch the Action to check-only.
    Without a terminal: right-click the `cv-match-coach` folder → *Compress* (Mac) or *Send to → Compressed folder* (Windows).
 3. Upload the zip via **Plugins → Skills → Create → Upload from your computer** (see the README).
 4. Run [the test script](test-script.md) on your own CV first, then the **test plan** (section 7) with more cases.
