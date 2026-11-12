@@ -45,4 +45,6 @@ Swedish works too: `Matcha`, `Erfarenhetskoll`, `Föreslå ändringar`, `Förbä
 - All commands: [English](docs/commands.md) · [Svenska](docs/kommandon.md)
 - First test with your own CV: [docs/test-script.md](docs/test-script.md)
 - Is it better than plain ChatGPT? [docs/compare-with-plain-chatgpt.md](docs/compare-with-plain-chatgpt.md)
+- Benchmark (run after every change): [benchmark/](benchmark/README.md)
+- GDPR and privacy checklist: [docs/gdpr-and-privacy.md](docs/gdpr-and-privacy.md)
 - Owner/admin guide: [docs/admin-guide.md](docs/admin-guide.md)

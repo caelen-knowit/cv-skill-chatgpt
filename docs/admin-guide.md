@@ -42,7 +42,7 @@ cv-agent/
 
 **Admin, one time:**
 1. Workspace settings → Permissions & roles: make sure **Skills** are enabled, and decide which roles may create and share skills (for example, only the owner creates, and the sales group may use).
-2. Confirm your data settings with IT/DPO. On Enterprise, OpenAI does not train on your business data by default. Check retention settings, since CVs are personal data under GDPR.
+2. Go through the [GDPR and privacy checklist](gdpr-and-privacy.md) with IT/DPO. On Enterprise, OpenAI does not train on your business data by default. Check retention settings, since CVs are personal data under GDPR.
 3. Optional: decide whether **memory** should be off for this use case. CV details should not end up in users' memory, and the skill tells ChatGPT not to save them.
 
 **Owner (for example a sales lead):**
