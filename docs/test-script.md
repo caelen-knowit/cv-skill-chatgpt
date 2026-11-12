@@ -5,7 +5,7 @@ Purpose: check the skill end to end, using a CV you know by heart. You will spot
 ## Before you start
 - Your CV exported from Cinode, **Word (.docx)** if possible, otherwise PDF.
 - A client request: a real one, or a public job ad / broker request that fits you, and one that does **not** fit you.
-- The skill uploaded (GETTING-STARTED.md path 1), or path 3 (Project).
+- The skill uploaded (see the [README](../README.md)), or the [Project setup](setup-alternatives.md).
 - A notes document where you record: test #, what went wrong, and a copy of the bad output.
 
 ## Run these in order (new chat)
@@ -34,4 +34,4 @@ Purpose: check the skill end to end, using a CV you know by heart. You will spot
 - Formatting problems in Word → expected to some degree. Use `Cinode` for paste-back instead.
 
 ## Privacy note
-It's your own CV, so testing is fine. Still, don't paste other people's CVs until IT/DPO has confirmed the setup (README section 3).
+It's your own CV, so testing is fine. Still, don't paste other people's CVs until IT/DPO has confirmed the setup ([admin guide](admin-guide.md), section 3).

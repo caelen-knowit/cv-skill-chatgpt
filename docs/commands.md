@@ -71,7 +71,7 @@ No level adds facts. Heavier levels usually come with more questions first.
 | `Word file` / `PDF file` | Download (structure follows the uploaded CV) |
 
 ## Good to know
-- Swedish commands work too (see `COMMANDS-sv.md`).
+- Swedish commands work too (see [kommandon.md](kommandon.md)).
 - A **Cinode export** works as both the CV and the template. Make the final layout with Cinode's export.
 - The skill **asks rather than guesses**. "Unclear" in a table means the CV doesn't prove it. Answer the question and it will be updated.
 - **"Listed only"** means the skill is in the skills list but not in any dated assignment, so it counts as 0 proven months.
