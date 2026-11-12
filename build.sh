@@ -31,3 +31,12 @@ zip -rq "$SKILL.zip" "$SKILL" -x "*.DS_Store"
 } > "$OUT"
 
 echo "Built $SKILL.zip and $OUT ($(wc -c < "$OUT") bytes)"
+
+# Public-repo guard: warn if the zip contains anything other than the skill's markdown files
+EXTRA=$(unzip -Z1 "$SKILL.zip" | grep -v -E '/$|\.md$' || true)
+if [ -n "$EXTRA" ]; then
+  echo
+  echo "WARNING: $SKILL.zip contains non-markdown files:"
+  echo "$EXTRA" | sed 's/^/  /'
+  echo "Upload this zip to ChatGPT, but do NOT commit it to the public repo (git checkout -- $SKILL.zip)."
+fi
