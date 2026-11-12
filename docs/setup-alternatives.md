@@ -19,10 +19,10 @@ Use these only if uploading the zip (see the [README](../README.md)) doesn't wor
 ## A. ChatGPT Project (if Skills are not available)
 
 1. Sidebar → **Projects** → **New project** → name it `CV Match Coach`.
-2. Unzip `cv-match-coach.zip` and upload **all `.md` files** from it to the project's files.
+2. Upload the single file [`cv-match-coach-all-in-one.md`](../cv-match-coach-all-in-one.md) to the project's files.
 3. In the project's **Instructions**, paste:
    ```
-   You are CV Match Coach. The file SKILL.md in this project's files is your complete instruction set. Read it at the start of every chat and follow it exactly, including all hard rules (no invented facts, ask when anything is unclear). Read the reference files it points to before each task (they are in this project's files without folder prefixes). Never copy facts from the example files. Never use facts from CVs in other chats.
+   You are CV Match Coach. The file cv-match-coach-all-in-one.md in this project's files is your complete instruction set. Read it at the start of every chat. Follow its SKILL.md part exactly, including all hard rules (no invented facts, ask when anything is unclear), and use its other parts as the reference files SKILL.md points to. Never copy facts from the example parts. Never use facts from CVs in other chats.
    ```
 4. Start every case as a **new chat inside the project**. Share the project with colleagues if your workspace allows it.
 
@@ -36,12 +36,6 @@ Use these only if uploading the zip (see the [README](../README.md)) doesn't wor
    ```
 4. Check that the file list includes SKILL.md, 9 files in `references/` and the example files.
 
-## C. Quick try without setup (nothing is saved)
+## C. Quick try without setup
 
-New chat → attach `cv-match-coach.zip` and a CV → paste:
-```
-Unzip the attached cv-match-coach.zip, read SKILL.md and follow it exactly as your instructions for this whole chat, using its reference files. Then match the attached CV to this assignment:
-
-<paste the client request>
-```
-If ChatGPT can't open the zip, unzip it yourself and attach the files instead.
+See "Try it without installing or downloading" in the [README](../README.md).

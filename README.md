@@ -11,11 +11,16 @@ Upload a consultant CV and a client request. You get an honest match, gaps, an e
 
 Can't see *Skills*? Ask your ChatGPT admin to enable it. Until then, use the [Project fallback](docs/setup-alternatives.md).
 
-**Just want to try it, without installing?** Open a new chat, attach `cv-match-coach.zip` (and a CV), and paste:
+## Try it without installing or downloading
+
+Open a new chat and paste:
 ```
-Unzip the attached cv-match-coach.zip, read SKILL.md and follow it exactly as your instructions for this whole chat, using its reference files. Then show me the start menu.
+Open https://raw.githubusercontent.com/caelen-knowit/cv-skill-chatgpt/main/cv-match-coach-all-in-one.md and read the whole file. Follow its SKILL.md part exactly as your instructions for this whole chat, using the other parts as the reference files. To confirm you read everything, tell me the last line of the file. Then show me the start menu.
 ```
-This works only in that chat. For daily use, install the skill as above.
+- If ChatGPT replies with the last line `END-OF-CV-MATCH-COACH <date>`, it read the whole file. If it can't open the link or gives a different last line, use the fallback below.
+- This needs the repo to be **public** and **web search/browsing enabled** in your workspace.
+- **Fallback:** download [`cv-match-coach-all-in-one.md`](cv-match-coach-all-in-one.md), attach it to the chat and use the same prompt, replacing "Open <link>" with "Read the attached file".
+- It only works in that chat. For daily use, install the skill as above.
 
 ## Use
 

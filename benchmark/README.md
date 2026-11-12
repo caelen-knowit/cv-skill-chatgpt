@@ -37,7 +37,7 @@ Score it with the same answer key and record it as "baseline" in `results.md`. T
 ## When a check fails
 1. Copy the exact output into an issue (or a note).
 2. Fix the relevant rule in `cv-match-coach/references/` (or SKILL.md).
-3. Rebuild the zip, re-upload, and re-run the whole benchmark, not just the failed case, because rule changes can break other things.
+3. Run `./build.sh`, re-upload, and re-run the whole benchmark, not just the failed case, because rule changes can break other things.
 
 ## Extending
 - Add a case when you find a new failure in real use. Fictionalise it and add an answer key with ⛔ for anything that would cause a factual error.

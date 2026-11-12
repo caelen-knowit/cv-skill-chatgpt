@@ -21,7 +21,9 @@ ChatGPT menus and limits change often. Check names and settings against your wor
 cv-agent/
 ├── README.md                 ← start here (users)
 ├── docs/                     ← commands (EN/SV), test script, admin guide, setup alternatives
-├── cv-match-coach.zip        ← ready-to-upload skill (rebuild after changes)
+├── cv-match-coach.zip        ← ready-to-upload skill (built by build.sh)
+├── cv-match-coach-all-in-one.md ← the same skill as one text file, for the link or a Project (built by build.sh)
+├── build.sh                  ← rebuilds both files
 └── cv-match-coach/           ← THE SKILL
     ├── SKILL.md              ← instructions: hard rules, workflow, commands
     ├── references/
@@ -47,10 +49,11 @@ cv-agent/
 
 **Owner (for example a sales lead):**
 1. Optional: put a template in `cv-match-coach/assets/`. **This isn't needed with Cinode.** The uploaded Cinode export is used as the template automatically, keeping its sections, order and headings, and the final layout comes from Cinode's own export.
-2. Rebuild the zip from the `cv-agent` folder:
+2. Rebuild the distributable files from the repo root:
    ```bash
-   rm -f cv-match-coach.zip && zip -r cv-match-coach.zip cv-match-coach -x "*.DS_Store"
+   ./build.sh
    ```
+   This rebuilds both `cv-match-coach.zip` and `cv-match-coach-all-in-one.md`. **Always run it after changing anything in `cv-match-coach/`, and commit both files**, otherwise the link-based start uses old rules.
    Without a terminal: right-click the `cv-match-coach` folder → *Compress* (Mac) or *Send to → Compressed folder* (Windows).
 3. Upload the zip via **Plugins → Skills → Create → Upload from your computer** (see the README).
 4. Run [the test script](test-script.md) on your own CV first, then the **test plan** (section 7) with more cases.
@@ -108,7 +111,7 @@ The skill improves only when **you curate its example library**:
 3. **Check it against real results.** Score alone isn't enough. A candidate also needs a positive outcome: the client shortlisted or interviewed the consultant, the deal was won, or a sales lead calls it a model CV.
 4. **Consent and anonymisation.** `Prepare for library` anonymises strictly: names, clients, unique project names, exact dates, and rare combinations that could identify someone. A human checks it line by line. The consultant agrees, or your DPO approves the legal basis.
 5. **Two-person approval.** For example, a sales lead plus a practice lead. A short note says why the example is good.
-6. **Add it to `examples/`, rebuild the zip, and re-upload.** ⚠️ If the GitHub repo is public, do this in a private copy (a company drive or private fork). Never commit real CVs, even anonymised ones, to the public repo. Keep at most about 2 examples per role type and language, and replace old ones rather than piling them up. Before/after pairs are especially useful.
+6. **Add it to `examples/`, run `./build.sh`, and re-upload.** ⚠️ If the GitHub repo is public, do this in a private copy (a company drive or private fork). Never commit real CVs, even anonymised ones, to the public repo. Keep at most about 2 examples per role type and language, and replace old ones rather than piling them up. Before/after pairs are especially useful.
 7. **Measure.** Keep a simple log (Excel/SharePoint) with date, role, match score, rewrite level, and outcome (shortlisted / interview / won / lost). Once a quarter, check what works and update the rules and examples.
 
 The details are in `references/cv-quality-rubric.md`. Examples are used **for style only**. The skill is told never to copy facts from them.
@@ -138,7 +141,7 @@ If something is off, add a concrete rule or example to the relevant reference fi
 
 ## 8. Maintenance
 
-- **One owner** edits the skill. Keep the source files in a shared folder (SharePoint/Git), rebuild the zip and re-upload after each change.
+- **One owner** edits the skill. Keep the source files in a shared folder (SharePoint/Git), run `./build.sh` and re-upload after each change.
 - Collect bad outputs in a Teams channel. Once a month, update the banned-phrases list and examples.
 - When the CV template changes, replace the file in `assets/` and re-upload.
 - Twice a year, review `examples/` and remove outdated ones.
