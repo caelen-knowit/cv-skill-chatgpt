@@ -27,7 +27,7 @@ Purpose: check the skill end to end, using a CV you know by heart. You will spot
 | 13 | `Grade this CV` | Is every score backed by a quote from your CV? | |
 | 14 | `Pitch` | Would you send it as-is? Is it free of hype? | |
 | 15 | During all steps: reply only `A`, `B` … | Every main answer ends with a progress line and an A–D menu that fits the situation. A letter runs the right option. | |
-| 16 | New chat: type `help` (and `hjälp`) | Start menu in the right language | |
+| 16 | New chat: `Start CV Match Coach` (and `Starta CV Match Coach`), then `A` | Start menu in the right language, then "Step 1 of 3" asking only for the CV, with the Word export hint. If you attach the CV and request together, it skips straight to the match. | |
 | 17 | Look at the end of every main answer | A "💡 My suggestion" line with a reason specific to this case, and heads-ups only when they are concrete | |
 
 ## Score the test

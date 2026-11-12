@@ -5,7 +5,7 @@ Always upload the CV first (Word, PDF, scan, CV-system export or pasted text), p
 
 ## Typical workflow
 
-You don't need to remember any of this. Every answer ends with a menu (A, B, C, D), and you reply with a letter. Type `help` to see the start menu. The commands below are shortcuts.
+**Start every case with `Start CV Match Coach`.** It guides you step by step. You don't need to remember any of this. Every answer ends with a menu (A, B, C, D), and you reply with a letter. Type `help` to see the start menu. The commands below are shortcuts.
 
 
 | Step | Type this | You get |

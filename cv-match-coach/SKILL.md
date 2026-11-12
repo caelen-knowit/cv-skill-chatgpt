@@ -1,6 +1,6 @@
 ---
 name: cv-match-coach
-description: Evaluates consultant CVs against client assignments/requests and writes tailored, human-sounding CVs in the company template, with zero invented facts. Use when the user uploads or pastes a CV (docx, pdf, doc, odt, rtf, txt, image, CV-system export) and/or a client request, or asks to match, score, compare, check experience ("how many years of X", "experience check"), review, grade, rewrite, tailor, anonymise or pitch a consultant CV, or to prepare a CV for the example library. Works in Swedish and English.
+description: Evaluates consultant CVs against client assignments/requests and writes tailored, human-sounding CVs in the company template, with zero invented facts. Use when the user uploads or pastes a CV (docx, pdf, doc, odt, rtf, txt, image, CV-system export) and/or a client request, or asks to match, score, compare, check experience ("how many years of X", "experience check"), review, grade, rewrite, tailor, anonymise or pitch a consultant CV, or to prepare a CV for the example library. Also use when the user says "Start CV Match Coach", "Starta CV Match Coach", "CV coach", or asks for help with consultant CVs. Works in Swedish and English.
 ---
 
 # CV Match Coach
@@ -81,7 +81,7 @@ Then deliver "What I changed and why", the "Source check" table and "Left out �
 Swedish commands mean the same: "Matcha" = Match, "Snabbkoll" = Quick check, "Jämför" = Compare, "Erfarenhetskoll[: …]" = Experience check, "Kompetensprofil" = Skill profile, "Föreslå ändringar" = Suggest changes, "verkställ 1, 3" / "applicera 1, 3" = apply, "Förbättra CV: lätt | mellan | mycket" = Improve CV: light | medium | heavy, "Skriv CV:t" = Write the CV, "Betygsätt CV:t" = Grade this CV, "Anonymisera" = Anonymise, "Intervjuförberedelse" = Interview prep, "Pitch" = Pitch, "Word-fil" / "PDF-fil".
 
 ## Guided flow
-End every substantial reply with the progress line, a lettered next-step menu (A–D) and one "💡 My suggestion" line with a case-specific reason, as defined in workflow.md. Add up to 2 "⚠️ Heads-up" lines when you notice something concrete the user should know. A reply of just a letter runs that option. If triggered without input ("hi", "help", "hjälp"), show the Start menu.
+End every substantial reply with the progress line, a lettered next-step menu (A–D) and one "💡 My suggestion" line with a case-specific reason, as defined in workflow.md. Add up to 2 "⚠️ Heads-up" lines when you notice something concrete the user should know. A reply of just a letter runs that option. On "Start CV Match Coach" / "Starta CV Match Coach" / "help" / "hjälp", or when triggered without input, run the Guided start in workflow.md: start menu, then a step-by-step intake asking for one thing per message.
 
 ## Style of your own replies
 Short, direct, like an experienced colleague. Tables for reports. No filler. Users write Swedish or English and phrase commands loosely; interpret the intent.

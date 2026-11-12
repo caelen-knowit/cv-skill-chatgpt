@@ -6,7 +6,7 @@ Skillen börjar alltid med att visa vad den har läst ur filen. Kontrollera det 
 
 ## Vanligt arbetsflöde
 
-Du behöver inte komma ihåg något av detta. Varje svar slutar med en meny (A, B, C, D), och du svarar med en bokstav. Skriv `hjälp` för att se startmenyn. Kommandona nedan är genvägar.
+**Börja varje ärende med `Starta CV Match Coach`.** Den guidar dig steg för steg. Du behöver inte komma ihåg något av detta. Varje svar slutar med en meny (A, B, C, D), och du svarar med en bokstav. Skriv `hjälp` för att se startmenyn. Kommandona nedan är genvägar.
 
 
 | Steg | Skriv | Du får |

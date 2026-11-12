@@ -1,2 +1,2 @@
-0f038758ce2b12d22033b1416f6a71f25e689249370f4b043b7ac9000ae0cfb1  cv-match-coach.zip
-4e1a22f45187b3fbb8a155e0f8a5747230c02b8c299b1ce1e7fb7edd8051dde4  cv-match-coach-all-in-one.md
+2ac1f6f13412e244109e5f71c2eeec8d8055d2aa81442810d9eaa05bf44c1f86  cv-match-coach.zip
+57bca476160868ee5a40e19f800a1247bc0e115445ec42a35a2eafce18d8a3ba  cv-match-coach-all-in-one.md
