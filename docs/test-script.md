@@ -28,6 +28,7 @@ Purpose: check the skill end to end, using a CV you know by heart. You will spot
 | 14 | `Pitch` | Would you send it as-is? Is it free of hype? | |
 | 15 | During all steps: reply only `A`, `B` … | Every main answer ends with a progress line and an A–D menu that fits the situation. A letter runs the right option. | |
 | 16 | New chat: type `help` (and `hjälp`) | Start menu in the right language | |
+| 17 | Look at the end of every main answer | A "💡 My suggestion" line with a reason specific to this case, and heads-ups only when they are concrete | |
 
 ## Score the test
 - **Any invented fact = stop.** Copy the exact output and send it to me. That's the most important bug class.

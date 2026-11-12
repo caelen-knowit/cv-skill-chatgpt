@@ -38,9 +38,10 @@ Use these only if uploading the zip (see the [README](../README.md)) doesn't wor
 
 ## C. Quick try without setup (nothing is saved)
 
-New chat → attach all files from the unzipped skill plus a CV → paste:
+New chat → attach `cv-match-coach.zip` and a CV → paste:
 ```
-Follow the attached SKILL.md exactly as your instructions for this whole chat, and use the attached reference files as it describes. Then match the attached CV to this assignment:
+Unzip the attached cv-match-coach.zip, read SKILL.md and follow it exactly as your instructions for this whole chat, using its reference files. Then match the attached CV to this assignment:
 
 <paste the client request>
 ```
+If ChatGPT can't open the zip, unzip it yourself and attach the files instead.

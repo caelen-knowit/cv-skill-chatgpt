@@ -11,19 +11,26 @@ Upload a consultant CV and a client request. You get an honest match, gaps, an e
 
 Can't see *Skills*? Ask your ChatGPT admin to enable it. Until then, use the [Project fallback](docs/setup-alternatives.md).
 
+**Just want to try it, without installing?** Open a new chat, attach `cv-match-coach.zip` (and a CV), and paste:
+```
+Unzip the attached cv-match-coach.zip, read SKILL.md and follow it exactly as your instructions for this whole chat, using its reference files. Then show me the start menu.
+```
+This works only in that chat. For daily use, install the skill as above.
+
 ## Use
 
 Open a new chat, attach a CV (a Cinode Word export works best), paste the client request, and type:
 ```
 Match this CV to this assignment
 ```
-After that, **just follow the menu**. Every answer ends with the next steps. Reply with a letter:
+After that, **just follow the menu**. Every answer ends with the next steps, the AI's recommended next step, and heads-ups when it spots something. Reply with a letter:
 ```
 Progress: ✓ CV read → ✓ Match → ◻ Questions → ◻ CV → ◻ Cinode/Word
 A – Answer the questions above
 B – Experience check on the requirements
 C – Suggest changes to the CV
 D – Something else
+💡 My suggestion: A, because 3 open questions affect the score.
 ```
 Not sure where to start? Type `help`.
 
