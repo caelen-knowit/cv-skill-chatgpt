@@ -1,6 +1,6 @@
 # CV Match Coach – ChatGPT skill
 
-Upload a consultant CV and a client request. You get an honest match, gaps, an experience check per skill, and an improved, human-sounding CV ready to paste back into Cinode.
+Upload a consultant CV and a client request. You get an honest match, gaps, an experience check per skill, and an improved, human-sounding CV, as a **Word file in exactly the same format as the original** (same fonts, sizes and layout) or as texts to paste back into Cinode.
 **It never invents facts.** If something is unclear, it asks.
 
 ## Setup (once, about 2 minutes)
@@ -24,7 +24,7 @@ Open https://raw.githubusercontent.com/caelen-knowit/cv-skill-chatgpt/main/cv-ma
 
 ## Use
 
-Open a new chat, attach a CV (a Cinode Word export works best), paste the client request, and type:
+Open a new chat, attach a CV (a **Word** export from Cinode, which is needed for exact-format output), paste the client request, and type:
 ```
 Match this CV to this assignment
 ```

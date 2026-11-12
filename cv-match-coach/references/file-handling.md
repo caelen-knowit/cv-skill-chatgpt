@@ -42,7 +42,4 @@ Rules:
 Requests come as email text, PDF/Word tender documents (often public-sector "förfrågningsunderlag" with "ska-krav"/"bör-krav"), or broker portal text. Same rules: extract, list what you found (number of must/should requirements), flag unreadable parts. For long tender documents, ask which section/role applies if there are several.
 
 ## 4. Output files
-- "Word file": python-docx. Prefer filling the company template (uploaded in chat > `assets/`). Keep its styles; do not invent new styles.
-- "PDF file": create the .docx first, then convert if a converter is available; otherwise build a simple PDF and say it is not the official layout.
-- Always name files clearly: `<Initials>_<Role>_<Client or "tailored">_<YYYY-MM-DD>.docx`.
-- Tell the user to check formatting, and that the CV-system (if used) is the official layout.
+Follow `docx-output.md`: the Word file is the uploaded .docx edited in place, so it keeps the exact format. PDF/scan input can't be returned in its exact format, so ask for the Word version.

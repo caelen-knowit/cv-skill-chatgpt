@@ -71,7 +71,7 @@ No level adds facts. Heavier levels usually come with more questions first.
 | `Remove <X>` | `Remove the assignments before 2015` |
 | `Show sources` | Source check table again |
 | `Cinode` | Changed texts field by field, ready to paste back into Cinode |
-| `Word file` / `PDF file` | Download (structure follows the uploaded CV) |
+| `Word file` / `PDF file` | Your uploaded Word CV with only the text changed: the same fonts, sizes and layout, checked automatically. PDF uploads can't keep their exact format, so upload the Word version. |
 
 ## Good to know
 - Swedish commands work too (see [kommandon.md](kommandon.md)).

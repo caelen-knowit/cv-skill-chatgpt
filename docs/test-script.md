@@ -21,7 +21,7 @@ Purpose: check the skill end to end, using a CV you know by heart. You will spot
 | 7 | `Suggest changes` then `apply 1, 3` | Only changes 1 and 3 are applied | |
 | 8 | `Improve CV: light` then `Heavier` | Light keeps your voice and structure. Heavier restructures. Neither adds facts. | |
 | 9 | `Cinode` | Field-by-field texts, only changed fields, ready to paste | |
-| 10 | `Word file` | The file opens, and its structure follows your Cinode CV | |
+| 10 | `Word file` (upload your CV as **.docx**) | Same fonts, sizes, colours, margins, header and logo as your original, with only the text changed. ChatGPT reports "format check passed". Also try with a PDF upload: it should ask for the Word version. | |
 | 11 | New chat: the same CV + the **non-matching** request. `Quick check` | Weak match / No-go, and the missing MUST is named | |
 | 12 | Repeat 3–5 in **the other language** (Swedish ↔ English), e.g. `Matcha CV:t mot uppdraget` | CV text stays in the CV's language. Swedish commands work. | |
 | 13 | `Grade this CV` | Is every score backed by a quote from your CV? | |

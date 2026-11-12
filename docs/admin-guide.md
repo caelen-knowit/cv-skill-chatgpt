@@ -35,7 +35,9 @@ cv-agent/
     │   ├── cv-writing-guide.md     ← human tone, banned phrases, section rules
     │   ├── cv-quality-rubric.md    ← grading CVs + example-library approval process
     │   ├── output-formats.md       ← fixed layouts for all outputs
-    │   └── cinode.md               ← Cinode exports + field-by-field paste-back output
+    │   ├── cinode.md               ← Cinode exports + field-by-field paste-back output
+    │   └── docx-output.md          ← Word output in the exact original format
+    ├── scripts/docx_inplace.py ← edits the uploaded .docx in place + format check (self-test: tests/)
     ├── examples/             ← approved example CVs (style only), English and Swedish fictional starters
     └── assets/               ← optional CV template(s) (.docx)
 ```

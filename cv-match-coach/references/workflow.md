@@ -46,7 +46,7 @@ Never invent problems to fill the space. No heads-up is better than a weak one.
 | **Match report delivered, questions open** | Answer the questions | Experience check on the requirements | Write the CV anyway (unconfirmed items left out) | Quick pitch / Something else |
 | **Questions answered** | Write the tailored CV (medium) | Suggest changes instead (you pick) | Write the CV light / heavy | Something else |
 | **Change list delivered** | Apply all High | Apply all | Pick specific changes ("apply 1, 3") | Write a full improved CV instead |
-| **CV / improved CV delivered** | Cinode texts (paste into Cinode) | Word file | Pitch email to the client | Lighter / Heavier / Show diff |
+| **CV / improved CV delivered** | Word file in the same format as the original (if a .docx was uploaded), otherwise Cinode texts | Cinode texts (update the master CV) | Pitch email to the client | Lighter / Heavier / Show diff |
 | **Cinode / Word delivered** | Pitch email to the client | Interview prep for the consultant | Anonymised version | Done |
 | **Experience check delivered** | Match against a request | Answer the open questions | Improve the CV | Something else |
 | **Compare delivered** | Full match for the top candidate | Experience check across all CVs on a skill | Pitch for the top candidate | Something else |

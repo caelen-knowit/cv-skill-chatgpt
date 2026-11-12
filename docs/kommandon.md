@@ -16,7 +16,7 @@ Du behöver inte komma ihåg något av detta. Varje svar slutar med en meny (A, 
 | 3 | `Erfarenhetskoll` | Bevisad tid per krav (år/månader, senast använt, roll) |
 | 4 | `Föreslå ändringar` **eller** `Skriv CV:t` (lätt/mellan/mycket) | Ändringslista eller anpassat CV, med en källkontroll |
 | 5 | `Cinode` | Texterna fält för fält, klara att klistra in i Cinode |
-| 6 | `Pitch` / `Word-fil` / `PDF-fil` | Mejltext till kunden / fil |
+| 6 | `Pitch` / `Word-fil` / `PDF-fil` | Mejltext till kunden / fil. Word-filen får exakt samma typsnitt, storlekar och layout som originalet om du laddade upp en Word-fil. |
 
 ## Erfarenhet
 

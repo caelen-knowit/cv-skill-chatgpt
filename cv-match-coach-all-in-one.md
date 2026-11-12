@@ -25,6 +25,8 @@ You help consultant sales people and managers at an IT consultancy to (1) evalua
 - `references/improve-cv.md` – "Suggest changes" (structured change list) and "Improve CV" at light / medium / heavy rewrite levels.
 - `references/output-formats.md` – exact layout of every output.
 - `references/cv-quality-rubric.md` – grading CV quality and the example-library process.
+- `references/docx-output.md` – Word output in the EXACT format of the uploaded CV (in-place editing + format check). Read before creating any file.
+- `scripts/docx_inplace.py` – the tool for that: run it with code execution.
 - `references/cinode.md` – Cinode CVs: structure, field-by-field output for pasting back into Cinode.
 - Template priority: (1) a template uploaded in the chat, (2) a template in `assets/`, (3) the uploaded CV itself. If none of (1)–(2) exists, the uploaded CV IS the template: keep its sections, order, headings, person/tense and format. Keep section order and headings in all cases.
 - `examples/` – approved example CVs. STYLE ONLY: imitate structure and tone, NEVER copy any fact, skill, client, number or phrase about a person from an example into another CV.
@@ -81,7 +83,7 @@ Then deliver "What I changed and why", the "Source check" table and "Left out �
 - "Pitch" → 5–7 line client email, human, specific, no hype.
 - "Interview prep" → 8 likely client questions, what to highlight, weak spots.
 - "Anonymise" → anonymised tailored CV. "Prepare for library" → strict anonymisation + grade per cv-quality-rubric.md.
-- "Word file" / "PDF file" → create the document with code. Use the template priority list; if the uploaded CV is a .docx, reuse it as the document base (replace text, keep styles). Otherwise a clean simple document. Tell the user to check formatting.
+- "Word file" / "PDF file" → follow docx-output.md exactly: edit a copy of the uploaded .docx in place with `scripts/docx_inplace.py` (dump → plan → apply → verify → read back) so fonts, sizes and layout stay identical. Never deliver a file that fails the format check. If the CV was uploaded as PDF/scan, ask for the Word version (Cinode: export as Word); never claim a rebuilt document has the original format.
 
 - "Cinode" / "Cinode format" → field-by-field output per cinode.md.
 
@@ -298,6 +300,54 @@ Short bullets, e.g.:
 - Inferring domain knowledge from a client name (bank → "regulatory expertise").
 - Copying the client's wording into the CV when the consultant has not done that exact thing.
 
+=== FILE: references/docx-output.md ===
+
+# Word output that keeps the original's exact format
+
+Goal: the delivered CV looks exactly like the uploaded one, with the same fonts, sizes, colours, spacing, margins, header/footer, logo and table layout. Only the text changes.
+
+**Rule: never build a new document. Always edit a copy of the uploaded .docx in place with `scripts/docx_inplace.py`.** Do not use python-docx's `add_paragraph`, `add_heading` or style changes directly, and do not create documents from scratch, when the user uploaded a .docx.
+
+## 1. Which input allows exact format
+
+| Uploaded CV | Exact format possible? | What to do |
+|---|---|---|
+| .docx (e.g. Cinode Word export) | **Yes** | Edit in place (section 2) |
+| .doc / .odt / .rtf | Usually | Convert to .docx with LibreOffice if available, then edit in place. Tell the user to check the result once. |
+| .pdf, scan, image | **No.** A PDF can't be edited back into its original layout reliably. | Ask: *"For the exact same format I need the Word version (Cinode: export as Word). Can you upload it? Otherwise I can give you the texts for Cinode, or a draft in a simple layout."* Never claim a rebuilt document has the original format. |
+
+## 2. Procedure (use code execution)
+
+If the script file is not available as a file (e.g. the skill was loaded from the all-in-one text), first write its code from the `scripts/docx_inplace.py` part to a file, unchanged.
+
+1. **Copy, don't overwrite:** work on the uploaded file; the output is a new file.
+2. **Dump the structure:**
+   `python docx_inplace.py dump original.docx > structure.json`
+   This gives every paragraph and table cell with an id, its style, text, and runs where formatting is mixed (e.g. bold "Technologies:" plus normal text). Note `not_editable` (text boxes, headers) and tell the user if CV content sits there.
+3. **Write the plan** (`plan.json`) mapping the approved new CV text onto the ids:
+   - Changed text → `set` (keeps the paragraph's formatting).
+   - Mixed formatting (label + value, bold role + normal client) → `set_runs`, reusing the run indices from the dump.
+   - Longer description → split into the same number of paragraphs as before where possible. Extra paragraphs → `insert_after` with `like` = an existing paragraph of the **same kind** (an assignment description paragraph, not a heading).
+   - Removed content → `delete` (paragraphs) or `delete_row` (table rows). Grouping old assignments: keep one row/paragraph, `set` its text, delete the rest.
+   - New assignment in a table layout → `insert_row_after` with `like` = an existing assignment row; use `{"runs": [...]}` for mixed-format cell lines.
+   - Headings, the name and the template's fixed labels are not changed unless the user asked (e.g. language switch).
+4. **Apply:** `python docx_inplace.py apply original.docx plan.json <output>.docx`
+5. **Verify (mandatory):** `python docx_inplace.py verify original.docx <output>.docx`
+   - `FORMAT CHECK: OK` → continue.
+   - `FAILED` → fix the plan (usually wrong `like` or a missing `set_runs`) and redo from step 4. **Never deliver a file that fails the check.**
+6. **Read back:** `python docx_inplace.py text <output>.docx` and compare against the approved CV text: is everything there, nothing duplicated, no old text left behind, and nothing extra?
+7. **Deliver** the file, named `<Initials>_<Role>_<Client or "tailored">_<YYYY-MM-DD>.docx`, with one line: "Same format as your original (format check passed). Page count: before X, after Y, if it changed."
+
+## 3. Length and page breaks
+Formatting stays identical, but more or less text can move page breaks. If the result is longer than the original or a limit, say so and offer `Shorter`. Don't change font sizes or margins to make it fit.
+
+## 4. PDF output
+- Best: the user opens the .docx in Word and chooses *Save as PDF*, or exports from Cinode. That uses their installed company fonts.
+- If the user wants the PDF from here: convert with LibreOffice if available, but warn: *"Company fonts may not be installed in my environment, so the PDF can use a substitute font. For the exact look, save as PDF from Word."*
+
+## 5. Cinode
+For CVs living in Cinode, the official layout comes from Cinode. Offer both: the Word file in exact format (for sending now), and the `Cinode` field-by-field texts (to update the master CV).
+
 === FILE: references/experience-check.md ===
 
 # Experience Check – rules for "does the consultant have X, and how much?"
@@ -411,10 +461,7 @@ Rules:
 Requests come as email text, PDF/Word tender documents (often public-sector "förfrågningsunderlag" with "ska-krav"/"bör-krav"), or broker portal text. Same rules: extract, list what you found (number of must/should requirements), flag unreadable parts. For long tender documents, ask which section/role applies if there are several.
 
 ## 4. Output files
-- "Word file": python-docx. Prefer filling the company template (uploaded in chat > `assets/`). Keep its styles; do not invent new styles.
-- "PDF file": create the .docx first, then convert if a converter is available; otherwise build a simple PDF and say it is not the official layout.
-- Always name files clearly: `<Initials>_<Role>_<Client or "tailored">_<YYYY-MM-DD>.docx`.
-- Tell the user to check formatting, and that the CV-system (if used) is the official layout.
+Follow `docx-output.md`: the Word file is the uploaded .docx edited in place, so it keeps the exact format. PDF/scan input can't be returned in its exact format, so ask for the Word version.
 
 === FILE: references/improve-cv.md ===
 
@@ -694,7 +741,7 @@ Never invent problems to fill the space. No heads-up is better than a weak one.
 | **Match report delivered, questions open** | Answer the questions | Experience check on the requirements | Write the CV anyway (unconfirmed items left out) | Quick pitch / Something else |
 | **Questions answered** | Write the tailored CV (medium) | Suggest changes instead (you pick) | Write the CV light / heavy | Something else |
 | **Change list delivered** | Apply all High | Apply all | Pick specific changes ("apply 1, 3") | Write a full improved CV instead |
-| **CV / improved CV delivered** | Cinode texts (paste into Cinode) | Word file | Pitch email to the client | Lighter / Heavier / Show diff |
+| **CV / improved CV delivered** | Word file in the same format as the original (if a .docx was uploaded), otherwise Cinode texts | Cinode texts (update the master CV) | Pitch email to the client | Lighter / Heavier / Show diff |
 | **Cinode / Word delivered** | Pitch email to the client | Interview prep for the consultant | Anonymised version | Done |
 | **Experience check delivered** | Match against a request | Answer the open questions | Improve the CV | Something else |
 | **Compare delivered** | Full match for the top candidate | Experience check across all CVs on a skill | Pitch for the top candidate | Something else |
@@ -795,5 +842,350 @@ Microsoft Certified: Azure Developer Associate (2021)
 
 **SPRÅK**
 Svenska (modersmål), engelska (flytande)
+
+=== FILE: scripts/docx_inplace.py ===
+
+```python
+#!/usr/bin/env python3
+"""
+docx_inplace.py – edit a CV .docx IN PLACE so the result keeps the original's exact
+format: fonts, sizes, colours, styles, spacing, margins, headers/footers, logos, tables.
+
+Only the text inside existing paragraphs/runs/table cells is changed. New paragraphs or
+table rows are deep copies of existing ones, so they inherit identical formatting.
+Styles, page setup, headers, footers and images are never touched.
+
+Usage (requires python-docx):
+  python docx_inplace.py dump   original.docx                 > structure.json
+  python docx_inplace.py apply  original.docx plan.json out.docx
+  python docx_inplace.py verify original.docx out.docx
+  python docx_inplace.py text   out.docx                       (plain text, to read back)
+
+Block ids (from `dump`):
+  p<N>                 body paragraph N              e.g. p12
+  t<T>.r<R>.c<C>.p<P>  paragraph P in table cell     e.g. t0.r3.c1.p0
+  t<T>.r<R>            table row (for row operations)
+  Nested tables: t0.r1.c0.t0.r2.c0.p0
+
+Plan (JSON list, applied in order; all ids refer to the ORIGINAL document, plus any
+"new_id" you create with insert_after):
+  {"op": "set", "id": "p12", "text": "New text"}
+      Replace the paragraph's text; keeps the formatting of its first non-empty run.
+      "\\n" becomes a line break inside the same paragraph.
+  {"op": "set_runs", "id": "p20", "runs": [{"like": 0, "text": "Technologies: "},
+                                           {"like": 1, "text": "Java, Kafka"}]}
+      For mixed formatting (e.g. bold label + normal text). "like" = index of the
+      original run (from `dump`) whose formatting to copy.
+  {"op": "insert_after", "id": "p20", "like": "p19", "text": "...", "new_id": "n1"}
+      New paragraph after "id", formatted exactly like "like" (default: same as "id").
+      Optional "runs" instead of "text", as in set_runs (indices refer to "like").
+  {"op": "delete", "id": "p21"}
+  {"op": "insert_row_after", "id": "t0.r3", "like": "t0.r3", "cells": [["Role"], ["Line 1", "Line 2"]],
+   "new_id": "row1"}
+      Copy row "like" after row "id"; "cells" = list of paragraph texts per cell.
+      A paragraph may be {"runs": [{"like": 0, "text": "Technologies: "}, {"like": 1, "text": "Java"}]}
+      to keep mixed formatting (run indices as in the copied row's paragraph).
+  {"op": "delete_row", "id": "t0.r4"}
+"""
+import copy
+import hashlib
+import json
+import sys
+
+try:
+    import docx  # python-docx
+    from docx.oxml.ns import qn
+    from docx.table import Table
+    from docx.text.paragraph import Paragraph
+except ImportError:  # pragma: no cover
+    sys.exit("python-docx is required: pip install python-docx")
+
+
+# ---------------------------------------------------------------- structure
+
+def _walk_tables(tables, prefix, out):
+    for ti, table in enumerate(tables):
+        tid = f"{prefix}t{ti}"
+        for ri, row in enumerate(table.rows):
+            rid = f"{tid}.r{ri}"
+            out[rid] = row
+            seen = set()
+            for ci, cell in enumerate(row.cells):
+                if id(cell._tc) in seen:  # merged cells repeat; skip duplicates
+                    continue
+                seen.add(id(cell._tc))
+                cid = f"{rid}.c{ci}"
+                for pi, p in enumerate(cell.paragraphs):
+                    out[f"{cid}.p{pi}"] = p
+                _walk_tables(cell.tables, f"{cid}.", out)
+
+
+def index_blocks(document):
+    """Map of id -> Paragraph or _Row, in document order."""
+    out = {}
+    pi = 0
+    ti = 0
+    body = document.element.body
+    for child in body.iterchildren():
+        if child.tag == qn("w:p"):
+            out[f"p{pi}"] = Paragraph(child, document._body)
+            pi += 1
+        elif child.tag == qn("w:tbl"):
+            table = Table(child, document._body)
+            tmp = {}
+            _walk_tables([table], "", tmp)
+            for k, v in tmp.items():  # renumber t0 -> t<ti>
+                out[f"t{ti}" + k[2:]] = v
+            ti += 1
+    return out
+
+
+def _run_info(run):
+    f = run.font
+    return {
+        "text": run.text,
+        "bold": f.bold,
+        "italic": f.italic,
+        "size": f.size.pt if f.size else None,
+        "font": f.name,
+    }
+
+
+def dump(path):
+    d = docx.Document(path)
+    blocks = []
+    for bid, obj in index_blocks(d).items():
+        if not isinstance(obj, Paragraph):
+            continue
+        item = {"id": bid, "style": obj.style.name if obj.style is not None else None, "text": obj.text}
+        runs = [r for r in obj.runs if r.text]
+        fmts = {json.dumps({k: v for k, v in _run_info(r).items() if k != "text"}) for r in runs}
+        if len(runs) > 1 and len(fmts) > 1:  # mixed formatting: show runs so set_runs can be used
+            item["runs"] = [dict(i=i, **_run_info(r)) for i, r in enumerate(obj.runs)]
+        if obj.paragraph_format is not None and _has_hyperlink(obj):
+            item["hyperlink"] = True
+        blocks.append(item)
+    unsupported = _unsupported_text_locations(d)
+    return {"blocks": blocks, "not_editable": unsupported}
+
+
+def _has_hyperlink(p):
+    return p._p.find(qn("w:hyperlink")) is not None
+
+
+def _unsupported_text_locations(d):
+    notes = []
+    if d.element.body.findall(".//" + qn("w:txbxContent")):
+        notes.append("Document contains text boxes; their text is not listed and will not be edited.")
+    for s in d.sections:
+        for part, name in ((s.header, "header"), (s.footer, "footer")):
+            if part is not None and any(p.text.strip() for p in part.paragraphs):
+                notes.append(f"Section {name} has text (kept unchanged).")
+    return sorted(set(notes))
+
+
+# ---------------------------------------------------------------- editing
+
+def _first_text_run(p):
+    for r in p.runs:
+        if r.text.strip():
+            return r
+    return p.runs[0] if p.runs else None
+
+
+def _clear_runs(p, keep=None):
+    for child in list(p._p):
+        if child.tag in (qn("w:r"), qn("w:hyperlink"), qn("w:proofErr")):
+            if keep is not None and child is keep._r:
+                continue
+            p._p.remove(child)
+
+
+def set_text(p, text):
+    keep = _first_text_run(p)
+    if keep is None:
+        p.add_run(text)
+        return
+    _clear_runs(p, keep=keep)
+    keep.text = text  # python-docx converts \n to <w:br/> and \t to <w:tab/>
+
+
+def set_runs(p, runs, source=None):
+    source = source if source is not None else p
+    originals = [copy.deepcopy(r._r) for r in source.runs]
+    if not originals:
+        sys.exit(f"set_runs: source paragraph has no runs to copy formatting from")
+    _clear_runs(p)
+    for spec in runs:
+        idx = spec.get("like", 0)
+        if not 0 <= idx < len(originals):
+            sys.exit(f"set_runs: run index {idx} out of range (0..{len(originals) - 1})")
+        new_r = copy.deepcopy(originals[idx])
+        p._p.append(new_r)
+        from docx.text.run import Run
+        Run(new_r, p).text = spec["text"]
+
+
+def apply(src, plan_path, out):
+    d = docx.Document(src)
+    blocks = index_blocks(d)
+    with open(plan_path, encoding="utf-8") as fh:
+        plan = json.load(fh)
+    log = []
+    for n, op in enumerate(plan, 1):
+        kind = op.get("op")
+        target = blocks.get(op.get("id"))
+        if target is None:
+            sys.exit(f"step {n}: unknown id {op.get('id')!r}")
+        if kind == "set":
+            set_text(target, op["text"])
+        elif kind == "set_runs":
+            set_runs(target, op["runs"])
+        elif kind == "insert_after":
+            like = blocks.get(op.get("like", op["id"]))
+            if like is None:
+                sys.exit(f"step {n}: unknown like {op.get('like')!r}")
+            new_p = copy.deepcopy(like._p)
+            target._p.addnext(new_p)
+            para = Paragraph(new_p, target._parent)
+            if "runs" in op:
+                set_runs(para, op["runs"], source=like)
+            else:
+                set_text(para, op.get("text", ""))
+            if op.get("new_id"):
+                blocks[op["new_id"]] = para
+        elif kind == "delete":
+            target._p.getparent().remove(target._p)
+        elif kind == "insert_row_after":
+            like = blocks.get(op.get("like", op["id"]))
+            new_tr = copy.deepcopy(like._tr)
+            target._tr.addnext(new_tr)
+            from docx.table import _Row
+            row = _Row(new_tr, target._parent)
+            cells = op.get("cells", [])
+            seen, ci = set(), 0
+            for cell in row.cells:
+                if id(cell._tc) in seen:
+                    continue
+                seen.add(id(cell._tc))
+                texts = cells[ci] if ci < len(cells) else [""]
+                paras = cell.paragraphs
+                for i, t in enumerate(texts):
+                    if i < len(paras):
+                        para = paras[i]
+                    else:
+                        np_ = copy.deepcopy(paras[-1]._p)
+                        cell._tc.append(np_)
+                        para = Paragraph(np_, cell)
+                    if isinstance(t, dict):  # {"runs": [...]} keeps mixed formatting
+                        set_runs(para, t["runs"])
+                    else:
+                        set_text(para, t)
+                for extra in paras[len(texts):]:
+                    extra._p.getparent().remove(extra._p)
+                ci += 1
+            if op.get("new_id"):
+                blocks[op["new_id"]] = row
+        elif kind == "delete_row":
+            target._tr.getparent().remove(target._tr)
+        else:
+            sys.exit(f"step {n}: unknown op {kind!r}")
+        log.append(f"{n}: {kind} {op.get('id')}")
+    d.save(out)
+    print(f"Saved {out} ({len(log)} edits)")
+
+
+# ---------------------------------------------------------------- verification
+
+def _canon(el):
+    if el is None:
+        return "-"
+    el = copy.deepcopy(el)
+    for e in el.iter():
+        for a in list(e.attrib):
+            if "rsid" in a:
+                del e.attrib[a]
+    from lxml import etree
+    return hashlib.sha1(etree.tostring(el, method="c14n")).hexdigest()[:12]
+
+
+def _fingerprints(d):
+    para_fmt, run_fmt = set(), set()
+    for p in d.element.body.iter(qn("w:p")):
+        para_fmt.add(_canon(p.find(qn("w:pPr"))))
+        for r in p.iter(qn("w:r")):
+            run_fmt.add(_canon(r.find(qn("w:rPr"))))
+    return para_fmt, run_fmt
+
+
+def _part_hash(part):
+    return hashlib.sha1(part.blob).hexdigest() if hasattr(part, "blob") else None
+
+
+def verify(orig_path, new_path):
+    a, b = docx.Document(orig_path), docx.Document(new_path)
+    problems = []
+    # styles, numbering, theme, fonts, headers/footers, images: must be byte-identical
+    pa = {str(p.partname): p for p in a.part.package.iter_parts()}
+    pb = {str(p.partname): p for p in b.part.package.iter_parts()}
+    for name, part in pa.items():
+        if name == "/word/document.xml" or name.startswith("/docProps/"):
+            continue
+        other = pb.get(name)
+        if other is None:
+            problems.append(f"missing part {name}")
+        elif name.endswith(".xml") or "/media/" in name:
+            if _part_hash(part) != _part_hash(other):
+                problems.append(f"changed part {name}")
+    for name in pb:
+        if name not in pa:
+            problems.append(f"new part {name}")
+    # page setup
+    for i, (sa, sb) in enumerate(zip(a.sections, b.sections)):
+        for attr in ("page_width", "page_height", "left_margin", "right_margin",
+                     "top_margin", "bottom_margin", "orientation"):
+            if getattr(sa, attr) != getattr(sb, attr):
+                problems.append(f"section {i}: {attr} changed")
+    if len(a.sections) != len(b.sections):
+        problems.append("number of sections changed")
+    # every paragraph/run format in the new document must exist in the original
+    pfa, rfa = _fingerprints(a)
+    pfb, rfb = _fingerprints(b)
+    if pfb - pfa:
+        problems.append(f"{len(pfb - pfa)} new paragraph format(s) not present in original")
+    if rfb - rfa:
+        problems.append(f"{len(rfb - rfa)} new text format(s) not present in original")
+    if problems:
+        print("FORMAT CHECK: FAILED")
+        for p in problems:
+            print(" -", p)
+        return 1
+    print("FORMAT CHECK: OK – styles, fonts, sizes, page setup, headers/footers and images "
+          "are identical to the original; all text uses formats from the original.")
+    return 0
+
+
+def text(path):
+    d = docx.Document(path)
+    for bid, obj in index_blocks(d).items():
+        if isinstance(obj, Paragraph) and obj.text.strip():
+            print(f"[{bid}] {obj.text}")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 3:
+        sys.exit(__doc__)
+    cmd = sys.argv[1]
+    if cmd == "dump":
+        print(json.dumps(dump(sys.argv[2]), ensure_ascii=False, indent=1))
+    elif cmd == "apply" and len(sys.argv) == 5:
+        apply(sys.argv[2], sys.argv[3], sys.argv[4])
+    elif cmd == "verify" and len(sys.argv) == 4:
+        sys.exit(verify(sys.argv[2], sys.argv[3]))
+    elif cmd == "text":
+        text(sys.argv[2])
+    else:
+        sys.exit(__doc__)
+```
 
 END-OF-CV-MATCH-COACH 2026-11-12

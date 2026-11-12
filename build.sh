@@ -21,10 +21,10 @@ zip -rq "$SKILL.zip" "$SKILL" -x "*.DS_Store"
   echo "'references/workflow.md', use the part with that path below. Read the whole file before starting."
   echo "The file ends with the line 'END-OF-CV-MATCH-COACH $VERSION'."
   echo
-  for f in "$SKILL/SKILL.md" "$SKILL"/references/*.md "$SKILL"/examples/example-*.md; do
+  for f in "$SKILL/SKILL.md" "$SKILL"/references/*.md "$SKILL"/examples/example-*.md "$SKILL"/scripts/*.py; do
     echo "=== FILE: ${f#"$SKILL"/} ==="
     echo
-    cat "$f"
+    case "$f" in *.py) echo '```python'; cat "$f"; echo '```' ;; *) cat "$f" ;; esac
     echo
   done
   echo "END-OF-CV-MATCH-COACH $VERSION"
@@ -33,10 +33,10 @@ zip -rq "$SKILL.zip" "$SKILL" -x "*.DS_Store"
 echo "Built $SKILL.zip and $OUT ($(wc -c < "$OUT") bytes)"
 
 # Public-repo guard: warn if the zip contains anything other than the skill's markdown files
-EXTRA=$(unzip -Z1 "$SKILL.zip" | grep -v -E '/$|\.md$' || true)
+EXTRA=$(unzip -Z1 "$SKILL.zip" | grep -v -E '/$|\.md$|^cv-match-coach/scripts/[a-z_]+\.py$' || true)
 if [ -n "$EXTRA" ]; then
   echo
-  echo "WARNING: $SKILL.zip contains non-markdown files:"
+  echo "WARNING: $SKILL.zip contains files other than the skill's markdown and scripts:"
   echo "$EXTRA" | sed 's/^/  /'
   echo "Upload this zip to ChatGPT, but do NOT commit it to the public repo (git checkout -- $SKILL.zip)."
 fi
